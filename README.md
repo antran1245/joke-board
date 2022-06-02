@@ -26,3 +26,5 @@ Create a Joke board where visitors can find jokes and vote on joke.
 ## Features
 - A like option for when you encounter a good/funny joke
 - A leaderboard showing the top 5 most like.
+
+![homepage](homepage.png)
