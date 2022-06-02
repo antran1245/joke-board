@@ -1,7 +1,7 @@
 import { Button, Card, Form, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from 'react';
-import YoMommaLike from './YoMommaLike';
+import JokeArrayLike from './JokeArrayLike';
 
 export default function YoMomma() {
     const [query, setQuery] = useState("")
@@ -19,6 +19,7 @@ export default function YoMomma() {
         } else {
             randomJoke()
         }
+        setLike(false);
     }
 
     const randomJoke = () => {
@@ -26,9 +27,10 @@ export default function YoMomma() {
         .then(resp => {
             setJoke(resp.data)})
         .catch(err => console.log(err))
+        setLike(false);
     }
 
-    const handleLike = async(liking) => {
+    const handleLike = (liking) => {
         let favoriteJoke = {joke: joke.joke};
         let count = 0;
         if (liking) {
@@ -38,8 +40,7 @@ export default function YoMomma() {
             setLike(false)
             count = -1;
         }
-        await axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
-        console.log(like)
+        axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
     }
 
     return(
@@ -49,7 +50,7 @@ export default function YoMomma() {
                 {
                     joke && joke.results &&
                     joke.results.map((item, i) => {
-                        return <YoMommaLike key={i} item={item} i={i}/>
+                        return <JokeArrayLike key={i} item={item}/>
                     })
                 }
                 {

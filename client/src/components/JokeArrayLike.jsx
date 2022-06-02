@@ -2,11 +2,11 @@ import { useState } from 'react';
 import {Card, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
 
-export default function YoMommaLike(props) {
+export default function JokeArrayLike(props) {
     const [like, setLike] = useState(false);
-    const {item, i} = props;
+    const {item} = props;
 
-    const handleLike = async(liking, joke) => {
+    const handleLike = (liking, joke) => {
         let favoriteJoke = {joke: joke};
         let count = 0;
         if (liking) {
@@ -16,8 +16,7 @@ export default function YoMommaLike(props) {
             setLike(false)
             count = -1;
         }
-        await axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
-        console.log(like)
+        axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
     }
 
     return(

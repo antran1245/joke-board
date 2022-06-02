@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import JokeArrayLike from "./JokeArrayLike";
 
 export default function DadJoke() {
     const [term, setTerm] = useState('');
@@ -17,7 +18,10 @@ export default function DadJoke() {
             })
             .then(resp => setJoke(resp.data))
             .catch(err => console.log(err))
+        } else {
+            randomJoke()
         }
+        setLike(false);
     }
 
     const randomJoke = () => {
@@ -28,10 +32,11 @@ export default function DadJoke() {
         })
         .then(resp => setJoke(resp.data))
         .catch(err => console.log(err))
+        setLike(false);
     }
 
-    const handleLike = async(liking) => {
-        let favoriteJoke = {joke: joke};
+    const handleLike = (liking) => {
+        let favoriteJoke = {joke: joke.joke};
         let count = 0;
         if (liking) {
             setLike(true)
@@ -40,8 +45,7 @@ export default function DadJoke() {
             setLike(false)
             count = -1;
         }
-        await axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
-        console.log(like)
+        axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
     }
 
     return(
@@ -51,16 +55,7 @@ export default function DadJoke() {
                 {
                     joke && joke.results &&
                     joke.results.map((item, i) => {
-                        return <Card.Text key={i} as={Row} className="d-flex align-items-center">
-                            <Col xs={10}>
-                                <em>{item.joke}</em>
-                            </Col>
-                            <Col xs={1}>
-                                {like?
-                                <span onClick={() => handleLike(false)}>&#10084;</span>:
-                                <span onClick={() => handleLike(true)}>&#128420;</span>}
-                            </Col>
-                            </Card.Text>
+                        return <JokeArrayLike item={item.joke} key={i} />
                     })
                 }
                 {

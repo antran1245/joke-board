@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import JokeAPILike from "./JokeAPILike";
 
 export default function JokeAPI() {
     const [category, setCategory] = useState({
@@ -18,11 +19,17 @@ export default function JokeAPI() {
                 output.push(key)
             }
         }
-        output.join()
-        axios.get(`https://v2.jokeapi.dev/joke/${output}`)
-        .then(resp => {
-            setJoke(resp.data)})
-        .catch(err => console.log(err))
+        if(output.length > 0){
+            output.join()
+            axios.get(`https://v2.jokeapi.dev/joke/${output}`)
+            .then(resp => {
+                setJoke(resp.data)})
+            .catch(err => console.log(err))
+        } else {
+            randomJoke()
+        }
+
+        setLike(false);
     }
 
     const randomJoke = () => {
@@ -31,10 +38,11 @@ export default function JokeAPI() {
             setJoke(resp.data)}
         )
         .catch(err => console.log(err))
+        setLike(false);
     }
 
-    const handleLike = async(liking) => {
-        let favoriteJoke = {joke: joke};
+    const handleLike = (liking) => {
+        let favoriteJoke = {joke: joke.joke};
         let count = 0;
         if (liking) {
             setLike(true)
@@ -43,8 +51,7 @@ export default function JokeAPI() {
             setLike(false)
             count = -1;
         }
-        await axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
-        console.log(like)
+        axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
     }
 
     return(
@@ -53,21 +60,7 @@ export default function JokeAPI() {
                 <Card.Title>Custom Jokes</Card.Title>
                 {
                     joke && joke.setup && joke.delivery &&
-                    <Row className="d-flex align-items-center">
-                        <Col xs={10}>
-                            <Card.Text>
-                                <b>Setup:</b> <em>{joke.setup}</em>
-                            </Card.Text>
-                            <Card.Text>
-                                <b>Delivery:</b> <em>{joke.delivery}</em>
-                            </Card.Text>
-                        </Col>
-                        <Col xs={1}>
-                            {like?
-                            <span onClick={() => handleLike(false)}>&#10084;</span>:
-                            <span onClick={() => handleLike(true)}>&#128420;</span>}
-                        </Col>
-                    </Row>
+                    <JokeAPILike joke={joke} />
 
                 }
                 {

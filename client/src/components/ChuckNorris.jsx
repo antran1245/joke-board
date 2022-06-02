@@ -22,16 +22,20 @@ export default function ChuckNorris() {
             axios.get(`https://api.chucknorris.io/jokes/random?category=${category}`)
             .then(resp => setJoke(resp.data.value))
             .catch(err => console.log(err))
+        } else {
+            randomJoke()
         }
+        setLike(false);
     }
 
     const randomJoke = () => {
         axios.get('https://api.chucknorris.io/jokes/random')
         .then(resp => setJoke(resp.data.value))
         .catch(err => console.log(err))
+        setLike(false);
     }
 
-    const handleLike = async(liking) => {
+    const handleLike = (liking) => {
         let favoriteJoke = {joke: joke};
         console.log(favoriteJoke)
         let count = 0;
@@ -42,8 +46,7 @@ export default function ChuckNorris() {
             setLike(false)
             count = -1;
         }
-        await axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
-        console.log(like)
+        axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
     }
     return(
         <Card className='h-100'>
