@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import { Container, Row, Col } from 'react-bootstrap';
+import ChuckNorris from './components/ChuckNorris';
 import './App.css';
+import YoMomma from './components/YoMomma';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid className='App'>
+      <Row className='mt-5 d-flex justify-content-center'>
+        <Col xs={12} sm={4} lg={3}>
+          <ChuckNorris />
+        </Col>
+        <Col xs={12} sm={4} lg={3} className="mt-3 mt-sm-0 mt-lg-0">
+          <YoMomma/>
+        </Col>
+        <Col xs={12} sm={4} lg={3} className="mt-3 mt-sm-0 mt-lg-0">
+          hi
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

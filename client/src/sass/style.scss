@@ -1,0 +1,22 @@
+
+.card {
+    background-color: #406882 !important;
+    color: white !important;
+    form {
+        button {
+            background-color: #6998AB;
+            border: none;
+        }
+        .random {
+            background-color: #9BA3EB;
+            &:hover {
+                background-color: #DBDFFD;
+                color: black;
+            }
+        }
+        button:hover {
+            background-color: #B1D0E0;
+            color: black;
+        }
+    }
+}
