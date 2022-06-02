@@ -19,6 +19,7 @@ Create a Joke board where visitors can find jokes and vote on joke.
 - React
 - React-bootstrap
 - Axios
+- Express
 
 **Database**
 - MongoDB
@@ -26,5 +27,8 @@ Create a Joke board where visitors can find jokes and vote on joke.
 ## Features
 - A like option for when you encounter a good/funny joke
 - A leaderboard showing the top 5 most like.
+**Future Feature**
+- Add a like option for the current top 5 in the leaderboard.
+- Display a random joke from a random API.
 
 ![homepage](homepage.png)
