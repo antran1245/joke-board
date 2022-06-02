@@ -6,3 +6,8 @@
 body {
   background-color: #1A374D !important;
 }
+
+.App > h1 {
+  color: white;
+  font-weight: bolder;
+}

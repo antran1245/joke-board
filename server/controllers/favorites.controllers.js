@@ -1,3 +1,4 @@
+const { model } = require('mongoose');
 const Favorite = require('../models/favorites.models');
 
 module.exports.Favorite = async(req, res) => {
@@ -21,4 +22,10 @@ module.exports.Favorite = async(req, res) => {
         .catch(err => res.json(err))
     }
     
+}
+
+module.exports.getAll = (req, res) => {
+    Favorite.find().sort({count: -1})
+    .then(resp => res.json(resp))
+    .catch(err => res.json(err))
 }
