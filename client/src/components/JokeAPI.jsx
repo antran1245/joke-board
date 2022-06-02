@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { RefreshContext } from "../context/RefreshContext";
 import JokeAPILike from "./JokeAPILike";
 
 export default function JokeAPI() {
@@ -9,6 +10,7 @@ export default function JokeAPI() {
     });
     const [joke, setJoke] = useState(null)
     const [like, setLike] = useState(false);
+    const {refresh, setRefresh} = useContext(RefreshContext);
 
 
     const handleJoke = (e) => {
@@ -52,6 +54,7 @@ export default function JokeAPI() {
             count = -1;
         }
         axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
+        setRefresh(!refresh)
     }
 
     return(

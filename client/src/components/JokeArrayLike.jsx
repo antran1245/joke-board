@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {Card, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
+import { RefreshContext } from '../context/RefreshContext';
 
 export default function JokeArrayLike(props) {
     const [like, setLike] = useState(false);
     const {item} = props;
+    const {refresh, setRefresh} = useContext(RefreshContext);
 
     const handleLike = (liking, joke) => {
         let favoriteJoke = {joke: joke};
@@ -17,6 +19,7 @@ export default function JokeArrayLike(props) {
             count = -1;
         }
         axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
+        setRefresh(!refresh)
     }
 
     return(

@@ -1,12 +1,14 @@
 import { Button, Card, Form, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import JokeArrayLike from './JokeArrayLike';
+import { RefreshContext } from '../context/RefreshContext';
 
 export default function YoMomma() {
     const [query, setQuery] = useState("")
     const [joke, setJoke] = useState(null)
     const [like, setLike] = useState(false);
+    const {refresh, setRefresh} = useContext(RefreshContext);
 
     const handleJoke = (e) => {
         e.preventDefault();
@@ -41,6 +43,7 @@ export default function YoMomma() {
             count = -1;
         }
         axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
+        setRefresh(!refresh)
     }
 
     return(

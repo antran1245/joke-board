@@ -1,15 +1,17 @@
 import { Card, Col, Row } from "react-bootstrap";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { RefreshContext } from "../context/RefreshContext";
 
 export default function LeaderBoard() {
     const [list, setList] = useState([])
+    const {refresh} = useContext(RefreshContext);
     
     useEffect(() => {
         axios.get('http://localhost:8000/api/favorite')
         .then(resp => setList(resp.data))
         .catch(err => console.log(err))
-    }, [])
+    }, [refresh])
 
     return(
         <Card className="h-100">

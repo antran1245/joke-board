@@ -1,12 +1,14 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { RefreshContext } from '../context/RefreshContext';
 
 export default function ChuckNorris() {
     const [list, setList] = useState([]);
     const [category, setCategory] = useState('default');
     const [joke, setJoke] = useState(null);
     const [like, setLike] = useState(false);
+    const {refresh, setRefresh} = useContext(RefreshContext);
 
     useEffect(() => {
         axios.get('https://api.chucknorris.io/jokes/categories')
@@ -47,7 +49,9 @@ export default function ChuckNorris() {
             count = -1;
         }
         axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
+        setRefresh(!refresh)
     }
+
     return(
         <Card className='h-100'>
             <Card.Body className='d-flex flex-column justify-content-between'>
