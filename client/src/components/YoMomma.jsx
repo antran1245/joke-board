@@ -8,7 +8,7 @@ export default function YoMomma() {
 
     const handleJoke = (e) => {
         e.preventDefault();
-        if(query != "") {
+        if(query !== "") {
             axios.get(`http://localhost:8000/api/yomomma/${query}`)
             .then(resp => {
                 console.log(resp.data)

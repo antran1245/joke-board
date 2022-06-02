@@ -4,6 +4,7 @@ import './App.css';
 import './sass/style.scss';
 import YoMomma from './components/YoMomma';
 import JokeAPI from './components/JokeAPI';
+import DadJoke from './components/DadJoke';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Col>
         <Col xs={12} sm={4} lg={3} className="mt-3 mt-sm-0 mt-lg-0">
           <JokeAPI />
+        </Col>
+        <Col xs={12} sm={4} lg={3} className="mt-3 mt-sm-0 mt-lg-0">
+          <DadJoke/>
         </Col>
       </Row>
     </Container>
