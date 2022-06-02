@@ -10,10 +10,7 @@ export default function YoMomma() {
         e.preventDefault();
         if(query != "") {
             axios.get(`https://yomomma-api.herokuapp.com/jokes`, {
-                mode: 'cors',
-                headers: {
-                    "Access-Control-Allow-Origin": "https://yomomma-api.herokuapp.com/*"
-                }
+                withCredentials: true,
             })
             .then(resp => console.log(resp))
             .catch(err => console.log(err))

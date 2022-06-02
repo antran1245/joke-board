@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react';
 import { Row, Col, Card, Form, Button } from 'react-bootstrap';
-import '../sass/style.scss';
 
 export default function ChuckNorris() {
     const [list, setList] = useState([]);
@@ -25,6 +24,11 @@ export default function ChuckNorris() {
         }
     }
 
+    const randomJoke = () => {
+        axios.get('https://api.chucknorris.io/jokes/random')
+        .then(resp => setJoke(resp.data.value))
+        .catch(err => console.log(err))
+    }
     return(
         <Card className='h-100'>
             <Card.Body className='d-flex flex-column justify-content-between'>
@@ -51,7 +55,7 @@ export default function ChuckNorris() {
                             <Button type='submit' className='w-100'><b>Submit</b></Button>
                         </Col>
                         <Col>
-                            <Button className='w-100 random'><b>Random</b></Button>
+                            <Button onClick={randomJoke} className='w-100 random'><b>Random</b></Button>
                         </Col>
                     </Row>
                 </Form>

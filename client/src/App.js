@@ -1,7 +1,9 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import ChuckNorris from './components/ChuckNorris';
 import './App.css';
+import './sass/style.scss';
 import YoMomma from './components/YoMomma';
+import JokeAPI from './components/JokeAPI';
 
 function App() {
   return (
@@ -14,7 +16,7 @@ function App() {
           <YoMomma/>
         </Col>
         <Col xs={12} sm={4} lg={3} className="mt-3 mt-sm-0 mt-lg-0">
-          hi
+          <JokeAPI />
         </Col>
       </Row>
     </Container>
