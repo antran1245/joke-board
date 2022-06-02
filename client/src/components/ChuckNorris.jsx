@@ -6,6 +6,7 @@ export default function ChuckNorris() {
     const [list, setList] = useState([]);
     const [category, setCategory] = useState('default');
     const [joke, setJoke] = useState(null);
+    const [like, setLike] = useState(false);
 
     useEffect(() => {
         axios.get('https://api.chucknorris.io/jokes/categories')
@@ -29,11 +30,38 @@ export default function ChuckNorris() {
         .then(resp => setJoke(resp.data.value))
         .catch(err => console.log(err))
     }
+
+    const handleLike = async(liking) => {
+        let favoriteJoke = {joke: joke};
+        console.log(favoriteJoke)
+        let count = 0;
+        if (liking) {
+            setLike(true)
+            count = 1;
+        } else {
+            setLike(false)
+            count = -1;
+        }
+        await axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
+        console.log(like)
+    }
     return(
         <Card className='h-100'>
             <Card.Body className='d-flex flex-column justify-content-between'>
                 <Card.Title><b>Chuck Norris Jokes</b></Card.Title>
-                <Card.Text><em>{joke !== 'default' && joke}</em></Card.Text>
+                <Card.Text as={Row} className="d-flex align-items-center">
+                    <Col xs={10}>
+                        <em>{joke !== 'default' && joke}</em>
+                    </Col>
+                    <Col xs={1}>
+                    {
+                        joke !== 'default' && joke? (like?
+                        <span onClick={() => handleLike(false)}>&#10084;</span>:
+                        <span onClick={() => handleLike(true)}>&#128420;</span>):
+                        <></>
+                    }
+                    </Col>
+                </Card.Text>
                 <Form onSubmit={handleJoke}>
                     <Form.Group as={Row} className="d-flex align-items-center">
                         <Col xs={12} lg={4}>

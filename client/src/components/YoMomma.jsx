@@ -1,10 +1,12 @@
 import { Button, Card, Form, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from 'react';
+import YoMommaLike from './YoMommaLike';
 
 export default function YoMomma() {
     const [query, setQuery] = useState("")
     const [joke, setJoke] = useState(null)
+    const [like, setLike] = useState(false);
 
     const handleJoke = (e) => {
         e.preventDefault();
@@ -22,10 +24,24 @@ export default function YoMomma() {
     const randomJoke = () => {
         axios.get(`http://localhost:8000/api/yomomma`)
         .then(resp => {
-            console.log(resp.data.joke)
             setJoke(resp.data)})
         .catch(err => console.log(err))
     }
+
+    const handleLike = async(liking) => {
+        let favoriteJoke = {joke: joke.joke};
+        let count = 0;
+        if (liking) {
+            setLike(true)
+            count = 1;
+        } else {
+            setLike(false)
+            count = -1;
+        }
+        await axios.post('http://localhost:8000/api/favorite', {favoriteJoke, count})
+        console.log(like)
+    }
+
     return(
         <Card className='h-100'>
             <Card.Body className='d-flex flex-column justify-content-between'>
@@ -33,12 +49,21 @@ export default function YoMomma() {
                 {
                     joke && joke.results &&
                     joke.results.map((item, i) => {
-                        return <Card.Text key={i}>{item}</Card.Text>
+                        return <YoMommaLike key={i} item={item} i={i}/>
                     })
                 }
                 {
                     joke && joke.joke &&
-                    <Card.Text>{joke.joke}</Card.Text>
+                    <Card.Text as={Row}>
+                        <Col xs={10}>
+                            <em>{joke.joke}</em>
+                        </Col>
+                        <Col xs={1}>
+                            {like?
+                            <span onClick={() => handleLike(false)}>&#10084;</span>:
+                            <span onClick={() => handleLike(true)}>&#128420;</span>}
+                        </Col>
+                    </Card.Text>
                 }
                 <Form onSubmit={handleJoke}>
                     <Form.Group>
