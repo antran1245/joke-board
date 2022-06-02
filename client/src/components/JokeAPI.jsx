@@ -60,7 +60,7 @@ export default function JokeAPI() {
     return(
         <Card className="h-100">
             <Card.Body className='d-flex flex-column justify-content-between'>
-                <Card.Title>Custom Jokes</Card.Title>
+                <Card.Title><b>Custom Jokes</b></Card.Title>
                 {
                     joke && joke.setup && joke.delivery &&
                     <JokeAPILike joke={joke} />

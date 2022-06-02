@@ -56,7 +56,7 @@ export default function DadJoke() {
     return(
         <Card className="h-100">
             <Card.Body className='d-flex flex-column justify-content-between'>
-                <Card.Title>Dad Jokes</Card.Title>
+                <Card.Title><b>Dad Jokes</b></Card.Title>
                 {
                     joke && joke.results &&
                     joke.results.map((item, i) => {
