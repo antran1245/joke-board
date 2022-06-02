@@ -25,7 +25,7 @@ module.exports.Favorite = async(req, res) => {
 }
 
 module.exports.getAll = (req, res) => {
-    Favorite.find().sort({count: -1})
+    Favorite.find().sort({count: -1}).limit(5)
     .then(resp => res.json(resp))
     .catch(err => res.json(err))
 }

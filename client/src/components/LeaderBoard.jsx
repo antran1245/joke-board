@@ -23,11 +23,11 @@ export default function LeaderBoard() {
                 </Row>
                 {list.map((item, i) => {
                     return <Row key={i} className="d-flex align-items-center">
-                        <Card.Text as={Col} xs={10} className="d-flex flex-column">
+                        <Card.Text as={Col} xs={9} sm={10} className="d-flex flex-column">
                             <span>{item.joke.setup && <b>Setup:</b>} <em>{item.joke.setup || item.joke.joke}</em></span>
                             <span>{item.joke.delivery && <b>Delivery:</b>} <em>{item.joke.delivery}</em></span>
                         </Card.Text>
-                        <Card.Text as={Col} xs={1} className="text-center">{item.count}</Card.Text>
+                        <Card.Text as={Col} xs={3} sm={2} className="text-center">{item.count}</Card.Text>
                         <hr/>
                     </Row>
                 })}

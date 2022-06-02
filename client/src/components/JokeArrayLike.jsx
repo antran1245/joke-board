@@ -23,15 +23,18 @@ export default function JokeArrayLike(props) {
     }
 
     return(
-        <Card.Text as={Row} className="d-flex align-items-center">
-            <Col xs={10}>
-                <em>{item}</em>
-            </Col>
-            <Col xs={1}>
-                {like?
-                <span onClick={() => handleLike(false, item)}>&#10084;</span>:
-                <span onClick={() => handleLike(true, item)}>&#128420;</span>}
-            </Col>
-        </Card.Text>
+        <>
+            <Card.Text as={Row} className="d-flex align-items-center">
+                <Col xs={10}>
+                    <em>{item}</em>
+                </Col>
+                <Col xs={1}>
+                    {like?
+                    <span onClick={() => handleLike(false, item)}>&#10084;</span>:
+                    <span onClick={() => handleLike(true, item)}>&#128420;</span>}
+                </Col>
+            </Card.Text>
+            <hr/>
+        </>
     )
 }

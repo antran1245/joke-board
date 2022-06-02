@@ -21,7 +21,7 @@ function App() {
             <LeaderBoard />
           </Col>
         </Row>
-        <Row className='mt-5 d-flex justify-content-center'>
+        <Row className='mt-3 d-flex justify-content-center'>
           <Col xs={12} sm={6} lg={6} className="mt-3 mt-sm-2">
             <ChuckNorris />
           </Col>

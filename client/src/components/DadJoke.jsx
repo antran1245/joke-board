@@ -15,7 +15,8 @@ export default function DadJoke() {
         if(term !== "") {
             axios.get(`https://icanhazdadjoke.com/search?term=${term}`, {
                 headers: {
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "User-Agent": "https://github.com/antran1245"
                 }
             })
             .then(resp => setJoke(resp.data))
@@ -29,7 +30,8 @@ export default function DadJoke() {
     const randomJoke = () => {
         axios.get('https://icanhazdadjoke.com/', {
             headers: {
-                "Accept": 'application/json'
+                "Accept": 'application/json',
+                "User-Agent": "https://github.com/antran1245"
             }
         })
         .then(resp => setJoke(resp.data))
